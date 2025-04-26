@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <link rel="stylesheet" th:href="@{static/styles.css}" />
+</head>
+<body>
+<h1 th:text="'Добрейший вечерок'">Hello, world!!!</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.id}">Person id</td>
+        <td th:text="${person.name}">Person name</td>
+        <td th:text="${person.email}">Person email</td>
+        <td>
+            <form class="actionType" th:action="@{/delete/{id} (id=${person.id})}" method="delete">
+                <button type="submit">Remove</button>
+            </form>
+
+            <form class="actionType" th:action="@{/update/{id} (id=${person.id})}" method="get">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<form action="/registration">
+    <div class="btnType">
+        <input class="btn" type="submit" value="Add new user" />
+    </div>
+</form>
+</body>
+</html>
